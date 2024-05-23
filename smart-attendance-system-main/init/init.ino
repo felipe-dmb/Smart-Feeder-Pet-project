@@ -5,7 +5,7 @@
 
 #define FIREBASE_HOST "smartfeederv2-8aa84-default-rtdb.firebaseio.com" //Without http://mqtt-b9578.firebaseio.com or https:// schemes
 #define FIREBASE_AUTH "PUSfHQ3vqKB5zPR0CcXodrx2ptWPK7bB4ceZNYAJ" //zeQcXZPtKdHZhKZe5DrX1oTgogiFZ1DW7sB2KWCj
-RFID rfid(D15, D13);       //D8/D15:pin of tag reader SDA. D0/d13:pin of tag reader RST 
+RFID rfid(D8, D0);       //D8/D15:pin of tag reader SDA. D0/d13:pin of tag reader RST 
 unsigned char str[MAX_LEN]; //MAX_LEN is 16: size of the array 
 
 const char ssid[] = "Julio;
