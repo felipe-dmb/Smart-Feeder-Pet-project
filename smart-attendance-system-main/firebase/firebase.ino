@@ -6,9 +6,12 @@
 #include "FirebaseESP8266.h"  // Install Firebase ESP8266 library
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include <FirebaseArduino.h>
 
 #define FIREBASE_HOST "smartfeederv2-8aa84-default-rtdb.firebaseio.com" //Without http://mqtt-b9578.firebaseio.com or https:// schemes
 #define FIREBASE_AUTH "PUSfHQ3vqKB5zPR0CcXodrx2ptWPK7bB4ceZNYAJ" //zeQcXZPtKdHZhKZe5DrX1oTgogiFZ1DW7sB2KWCj
+const int D8 = 8;
+const int D0 = 0;
 RFID rfid(D8, D0);       //D10:pin of tag reader SDA. D9:pin of tag reader RST 
 unsigned char str[MAX_LEN]; //MAX_LEN is 16: size of the array 
 LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
@@ -26,8 +29,8 @@ FirebaseJson json;
 FirebaseData firebaseData;
 
 unsigned long lastMillis = 0;
-const int red = D4;
-const int green = D3;
+//const int red = D4;
+//const int green = D3;
 String alertMsg;
 String device_id="device11";
 boolean checkIn = true;
@@ -48,8 +51,8 @@ void setup()
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
 
-  pinMode(red, OUTPUT);
-  pinMode(green, OUTPUT);
+  //pinMode(red, OUTPUT);
+  //pinMode(green, OUTPUT);
   lcd.init();                      // initialize the lcd 
   lcd.clear();
   lcd.backlight();
@@ -144,4 +147,3 @@ void loop() {
   lcd.print("GATE CLOSE");
   delay(500);
   lcd.clear();
-}
