@@ -1,167 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <title>PET SMART FEEDER</title>
+  <title>Pet Smart Feeder - Dashboard Fofinho</title>
   <meta charset="UTF-8">
   <meta name='viewport' content="width=device-width, initial-scale=1.0">
-<!-- Below is the initialization snippet for my Firebase project. It will vary for each project -->
+  <meta name="description" content="Dashboard para monitoramento de pets com comedouros inteligentes.">
+  <meta name="author" content="Pet Smart Feeder Team">
+  <meta name="keywords" content="pets, comedouros inteligentes, monitoramento, dashboard, IoT">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="./img/favicon.ico" type="image/png">
 
-<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-  apiKey: "AIzaSyC6C01Lt4_1MjBNAXgO4KiBI0jU-PVjoj0",
-  authDomain: "smartfeederv2-8aa84.firebaseapp.com",
-  databaseURL: "https://smartfeederv2-8aa84-default-rtdb.firebaseio.com",
-  projectId: "smartfeederv2-8aa84",
-  storageBucket: "smartfeederv2-8aa84.appspot.com",
-  messagingSenderId: "239168017370",
-  appId: "1:239168017370:web:5ef43a763f4f944f5966e3"
-  };
+  <!-- Google Font: Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 
-  
-  firebase.initializeApp(config);
-</script>
-<link href="style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
-<link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css" rel="stylesheet">
-</head>
+  <!-- Bootstrap 4 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- Font Awesome 5 (Versão mais recente tem mais ícones fofos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- DataTables CSS -->
+  <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
+  <link href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css" rel="stylesheet">
 
+  <!-- Seu CSS Customizado (DEVE VIR POR ÚLTIMO) -->
+  <link href="style.css" rel="stylesheet">
 
-<body>
-    <div class="heading">
-        <h1>PET SMART FEEDER</h1>
-    </div>
-  <div class="container">
-    <div class="card">
-      <div class="card-header">
-          <i class="fa fa-table mr-1"></i>
-          Vezes que o pet se aproximou da ração:
-      </div>
-      <div class="card-body">
-        <button type="button" class="btn btn-primary" id="export">
-          <i class="fa fa-download" aria-hidden="true"></i>
-        </button>
-          <div class="table-responsive">
-              <table class="table table-bordered display responsive nowrap" id="buttonTable" width="100%" cellspacing="0" data-order="[]">
-                  <thead>
-                      <tr>
-                          <th>Pet ID</th>      <!-- User ID-->
-                          <th>Comedouro Id</th><!-- Device ID-->
-                          <th>Horario</th>        <!-- Tme-->
-                          <th>Status</th>      <!-- User ID-->
-                      </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
-              </table>
-          </div>
-      </div>
-  </div>
-  <div class="card mt-4">
-      <div class="card-header">
-          <i class="fa fa-table mr-1"></i>
-          LIVE STATUS
-      </div>
-      <div class="card-body users">
-        
-      </div>
-  </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
-
+  <!-- Firebase Initialization (Mantido, mas não será usado inicialmente) -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
   <script>
-    $(function(){
-      $('.users').html('No data available');
-      document.getElementById("export").onclick = function() { exportCSV() }; 
-  
-      function exportCSV() {
-      //// export CSV
-        console.log("exportCSV");
-        $('#buttonTable').DataTable().button(0).trigger();
-      } 
-
-      var button_table = $('#buttonTable').DataTable({
-        "ordering": false,
-        "paging": false,
-        buttons: [
-        	{
-            extend: 'csv',
-            filename: 'file_name',
-           	extension: '.csv'
-        	}
-    		],
-        initComplete: function() {
-        
-        $('.buttons-csv').hide();
-      }
-    });
-
-    firebase.database().ref('/').on('value',function(snap){   
-      if(snap.val().users){
-        let obj= snap.val().users;
-        console.log(obj);
-        $('.users').html('');
-        if(Object.keys(obj).length>0){
-          Object.keys(obj).forEach(key=>{
-            $('.users').append(`
-            <div class="live">
-              <img src="./img/checkin.png" width="150px">
-              <ul>
-                <li><h3>UID: ${key}</h3></li>
-                <li><img id="true${key}" width="50px" src="./img/tick.png"></li>
-                <li><img id="false${key}" width="50px" src="./img/cross.png"></li>
-              </ul>
-            </div>
-            `);
-            if(obj[key]==1){
-              $('#true'+key).show();
-              $('#false'+key).hide();
-            }else{
-              $('#true'+key).hide();
-              $('#false'+key).show();
-            }
-          })
-        }
-      }
-      if(snap.val().attendence){
-          button_table.clear().draw();
-
-          let arr= Object.values(snap.val().attendence);
-          console.log(arr);  
-          arr.forEach(function(elem,i){
-              //console.log(table.row);
-              var row= `<tr>
-                  <td>${elem.uid}</td>
-                  <td>${elem.id}</td>
-                  <td>${new Date(elem.time.slice(0, -1)).toLocaleString()}</td>
-                  <td id="state${new Date(elem.time).getTime()}"></td>                
-              </tr>`;
-              button_table.rows.add($(row)).draw();
-              if(elem.status){
-                  //console.log(elem.status);
-                  $('#state'+new Date(elem.time).getTime()).html('<span class="badge badge-success">Check In</span>');
-              }else{
-                  $('#state'+new Date(elem.time).getTime()).html('<span class="badge badge-danger">Check Out</span>');
-              }
-          })
-        }
-    })
-
-});
+    var config = { /* Suas credenciais Firebase aqui */ };
+    // firebase.initializeApp(config); // Comentado por enquanto
+    console.log("Firebase NÃO inicializado (usando dados mocados).");
   </script>
-</body>
 
+</head>
+<body>
+
+    <!-- Navbar Fofinha -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="./img/logo.png" alt="Logo" height="45">
+          Pet Smart Feeder
+        </a>
+         <span class="navbar-text">
+           Monitoramento Amigável <i class="fas fa-paw" style="color: var(--cor-rosa);"></i>
+        </span>
+      </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="container">
+
+        <!-- Saudação e Botão de Simulação -->
+        <!-- <div class="text-center mb-4">
+            <h2 class="section-title">Olá! <i class="fas fa-dog" style="color: var(--cor-azul);"></i> Veja como estão seus pets!</h2>
+            <button id="simulate-change-btn" class="btn btn-sm btn-info mt-2">Simular Mudança de Status</button>
+             <small class="form-text text-muted">(Apenas para demonstração)</small>
+        </div> -->
+
+
+        <!-- Seção Status Ao Vivo -->
+        <h3 class="section-subtitle mb-3"><i class="fas fa-signal" style="color: var(--cor-verde);"></i> Status Ao Vivo</h3>
+        <div id="live-status-row" class="row mb-5">
+            <div class="col-12 text-center" id="live-status-placeholder">
+                <p class="text-muted">Carregando status dos pets...</p>
+                <div class="spinner-border text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Histórico -->
+         <h3 class="section-subtitle mb-3"><i class="fas fa-history" style="color: var(--cor-laranja);"></i> Histórico de Aproximações</h3>
+        <div class="card data-card shadow-sm">
+          <div class="card-body">
+              <div class="table-responsive mt-3">
+                  <table class="table table-hover display responsive nowrap" id="attendanceTable" width="100%" data-order='[[ 2, "desc" ]]'>
+                      <thead class="thead-pastel">
+                          <tr>
+                              <th><i class="fas fa-id-badge mr-1"></i>Pet ID</th>
+                              <th><i class="fas fa-utensils mr-1"></i>Comedouro</th>
+                              <th><i class="far fa-clock mr-1"></i>Horário</th>
+                              <th><i class="fas fa-toggle-on mr-1"></i>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+        </div>
+
+    </div> <!-- Fim .container -->
+
+    <!-- Footer Fofinho -->
+    <footer class="text-center mt-5 mb-4 footer-cute">
+        <p><i class="fas fa-paw"></i> Feito com <i class="fas fa-heart" style="color: #e91e63;"></i> para o Projeto Integrador V da UNIVESP.  <i class="fas fa-paw"></i></p>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> 
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script> 
+    <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+
+    <!-- Seu Código JavaScript com Dados Mocados -->
+    <script src="script.js"></script>
+
+</body>
 </html>
