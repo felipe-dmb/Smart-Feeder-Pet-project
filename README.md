@@ -1,6 +1,5 @@
 <h1 align="center">🐾 Pet Smart Feeder 2.0 🐾</h1>
 
-<!-- Badges (Opcional: Substitua pelos links reais gerados pelo GitHub ou Shields.io) -->
 ![GitHub language count](https://img.shields.io/github/languages/count/juxxnn/Smart-Feeder-Pet-project?color=%23a2d2ff)
 ![GitHub repo size](https://img.shields.io/github/repo-size/juxxnn/Smart-Feeder-Pet-project?color=%23ffc8dd)
 ![GitHub license](https://img.shields.io/github/license/juxxnn/Smart-Feeder-Pet-project?color=%23caffbf)
@@ -38,8 +37,8 @@ Este projeto visa oferecer aos donos de pets uma maneira fácil e visual de ente
 *   **Backend (Base de Dados):**
     *   Firebase Realtime Database (para armazenamento e sincronização de dados em tempo real)
 *   **Hardware (Não incluído neste repositório):**
-    *   Microcontrolador (Ex: ESP32, ESP8266, Arduino com módulo WiFi)
-    *   Leitor RFID (Ex: MFRC522)
+    *   Microcontrolador 
+    *   Leitor RFID 
     *   Tags RFID (para coleira dos pets)
 
 ## 👥 Equipe do Projeto
@@ -71,7 +70,7 @@ Siga estas etapas para visualizar a interface web em seu computador:
 1.  **Clone o Repositório:**
     ```bash
     git clone https://github.com/juxxnn/Smart-Feeder-Pet-project.git
-    cd SEU_REPOSITORIO # Navegue até a pasta clonada
+    cd Smart-Feeder-Pet-project # Navegue até a pasta clonada
     cd attendance-system # Entre na pasta principal do frontend
     ```
 
