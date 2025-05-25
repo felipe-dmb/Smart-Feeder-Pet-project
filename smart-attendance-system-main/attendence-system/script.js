@@ -22,14 +22,14 @@ $(function() {
     };
 
     let mockAttendanceData = [
-        { uid: 'Thor', id: 'Comedouro A', time: '2025-03-27T10:30:00Z', status: true },
-        { uid: 'Bidu', id: 'Comedouro B', time: '2025-03-27T10:35:15Z', status: true },
-        { uid: 'Thor', id: 'Comedouro A', time: '2025-03-27T10:45:00Z', status: false },
-        { uid: 'Amora', id: 'Comedouro A', time: '2025-03-27T11:00:00Z', status: true },
-        { uid: 'Bidu', id: 'Comedouro B', time: '2025-03-27T11:05:00Z', status: false },
-        { uid: 'Thor', id: 'Comedouro A', time: '2025-03-27T11:30:00Z', status: true },
-        { uid: 'Simba', id: 'Comedouro C', time: '2025-03-27T11:45:00Z', status: true },
-        { uid: 'Luna', id: 'Comedouro A', time: '2025-03-27T12:00:00Z', status: true }, // Evento para Luna
+        { uid: 'Thor', id: 'Comedouro A', time: '2025-04-28T10:30:00Z', status: true },
+        { uid: 'Bidu', id: 'Comedouro B', time: '2025-04-28T10:35:15Z', status: true },
+        { uid: 'Thor', id: 'Comedouro A', time: '2025-04-28T14:45:00Z', status: false },
+        { uid: 'Amora', id: 'Comedouro A', time: '2025-04-28T15:00:00Z', status: true },
+        { uid: 'Bidu', id: 'Comedouro B', time: '2025-04-28T15:05:00Z', status: false },
+        { uid: 'Thor', id: 'Comedouro A', time: '2025-04-29T11:30:00Z', status: true },
+        { uid: 'Simba', id: 'Comedouro C', time: '2025-04-29T11:45:00Z', status: true },
+        { uid: 'Luna', id: 'Comedouro A', time: '2025-04-29T12:00:00Z', status: true }, // Evento para Luna
     ];
 
     // --- Seletores do DOM ---
